@@ -9,14 +9,14 @@ pub struct Multicaster {
 }
 
 impl Multicaster {
-    pub async fn new(local_ip: &str, multi_ip: &str, port: u16) -> Multicaster {
+    pub async fn new(local_ip: &str, multi_ip: &str, port: u16, loopback: bool) -> Multicaster {
         let socket = UdpSocket::bind((local_ip, port)).await.unwrap();
 
         socket
             .join_multicast_v4(multi_ip.parse().unwrap(), local_ip.parse().unwrap())
             .unwrap();
 
-        socket.set_multicast_loop_v4(false).unwrap();
+        socket.set_multicast_loop_v4(loopback).unwrap();
 
         Multicaster {
             multi_ip: multi_ip.to_string(),
