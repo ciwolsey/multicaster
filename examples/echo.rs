@@ -9,6 +9,6 @@ async fn main() {
         let (len, src) = multi.rec(&mut buf).await;
         multi.send(&mut buf).await;
 
-        println!("Echoed {} bytes from {}: {}", len, src, String::from_utf8_lossy(&buf));
+        println!("Echoed {} bytes from IP: {}: {}", len, src, String::from_utf8_lossy(&buf));
     }
 }
