@@ -7,8 +7,6 @@ async fn main() {
     loop {
         let mut buf: [u8; 256] = [0x00; 256];
         let (len, src) = multi.rec(&mut buf).await;
-        
-        multi.rec(&mut buf).await;
         multi.send(&mut buf).await;
 
         println!("Echoed {} bytes from {}: {}", len, src, String::from_utf8_lossy(&buf));
